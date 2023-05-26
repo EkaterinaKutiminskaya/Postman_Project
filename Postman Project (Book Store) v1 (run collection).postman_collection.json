@@ -1,8 +1,8 @@
 {
 	"info": {
 		"_postman_id": "42bf9c36-24f3-40a2-ab67-67144413c3ef",
-		"name": "Postman Interceptor https://demoqa.com/login",
-		"description": "Коллекция собрана на основе Postman Interceptor. Удалены дополнительные и дублирующие запросы, добавлены тесты и переменные. Добавлен запрос на подтверждение авторизации Auth. Коллекция подготовлена для запуска через тестранер.",
+		"name": "Postman Project (Book Store) v1 (run collection)",
+		"description": "Коллекция собрана на основе Postman Interceptor. Удалены дополнительные и дублирующие запросы, добавлены тесты и переменные. Добавлен запрос на подтверждение авторизации Auth. Коллекция подготовлена для запуска через run collection.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "23398719"
 	},
@@ -710,6 +710,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [
 					{
@@ -730,7 +740,8 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer {{token}}"
+						"value": "Bearer {{token}}",
+						"disabled": true
 					},
 					{
 						"key": "User-Agent",
