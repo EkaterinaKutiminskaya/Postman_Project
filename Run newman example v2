@@ -1,0 +1,153 @@
+19:39:57 kate ~ $ cd Рабочий\ стол/ТЕСТИРОВАНИЕ/Projects/Postman_Project/
+19:40:29 kate ~/Рабочий стол/ТЕСТИРОВАНИЕ/Projects/Postman_Project (main) $ newman run 'Postman_Project_Book_Store_v2.postman_collection.json' -e 'Environment for BookStore.postman_environment.json' 
+newman
+
+Postman_Project_Book_Store_v2
+
+→ Create new user
+  POST https://demoqa.com/Account/v1/User [201 Created, 329B, 755ms]
+  ✓  Body have a username
+  ✓  Status code is 201
+
+→ GenerateToken (when try login)
+  POST https://demoqa.com/Account/v1/GenerateToken [200 OK, 532B, 382ms]
+  ✓  Status code is 200
+  ✓  Body have a token
+
+→ Auth
+  POST https://demoqa.com/Account/v1/Authorized [200 OK, 246B, 221ms]
+  ✓  Authorization completed
+  ✓  Status code is 200
+
+→ Login
+  POST https://demoqa.com/Account/v1/Login [200 OK, 633B, 239ms]
+  ✓  Body have a token
+  ✓  Status code is 200
+
+→ Get user
+  ┌
+  │ 'Does userId exist? true'
+  │ 'Does token exist? true'
+  └
+  GET https://demoqa.com/Account/v1/User/dffc7f9a-baa3-4598-80a6-29d823a331e9 [200 OK, 324B, 219ms]
+  ✓  Status code is 200
+  ✓  User has no books
+
+→ Get books
+  GET https://demoqa.com/BookStore/v1/Books [200 OK, 4.76kB, 182ms]
+  ┌
+  │ 'Array length: 8'
+  └
+  ✓  number of books
+  ✓  Status code is 200
+  ┌
+  │ 'Array ISBN: 9781449325862,9781449331818,9781449337711,9781449365035,9781491904244,9781491950296,9781593275846,9781593277574'
+  └
+
+→ Add all books to the user (loop)
+  ┌
+  │ 'currentBookIsbn: 9781449325862'
+  │ 'bookIsbns: 9781449331818,9781449337711,9781449365035,9781491904244,9781491950296,9781593275846,9781593277574'
+  └
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 212ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  ┌
+  │ 'currentBookIsbn: 9781449331818'
+  │ 'bookIsbns: 9781449337711,9781449365035,9781491904244,9781491950296,9781593275846,9781593277574'
+  └
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 321ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  ┌
+  │ 'currentBookIsbn: 9781449337711'
+  │ 'bookIsbns: 9781449365035,9781491904244,9781491950296,9781593275846,9781593277574'
+  └
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 177ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  ┌
+  │ 'currentBookIsbn: 9781449365035'
+  │ 'bookIsbns: 9781491904244,9781491950296,9781593275846,9781593277574'
+  └
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 188ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  ┌
+  │ 'currentBookIsbn: 9781491904244'
+  │ 'bookIsbns: 9781491950296,9781593275846,9781593277574'
+  └
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 272ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  ┌
+  │ 'currentBookIsbn: 9781491950296'
+  │ 'bookIsbns: 9781593275846,9781593277574'
+  └
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 176ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  ┌
+  │ 'currentBookIsbn: 9781593275846'
+  │ 'bookIsbns: 9781593277574'
+  └
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 265ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  ┌
+  │ 'currentBookIsbn: 9781593277574'
+  │ 'bookIsbns: '
+  │ 'All books added to user'
+  └
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 278ms]
+  ✓  Status code is 201
+
+→ Get user after Add books
+  GET https://demoqa.com/Account/v1/User/dffc7f9a-baa3-4598-80a6-29d823a331e9 [200 OK, 4.83kB, 376ms]
+  ✓  Status code is 200
+  ✓  User has all books
+
+→ Delete all books
+  DELETE https://demoqa.com/BookStore/v1/Books?UserId=dffc7f9a-baa3-4598-80a6-29d823a331e9 [204 No Content, 185B, 565ms]
+  ✓  Status code is 204
+
+→ Get user after Delete books
+  GET https://demoqa.com/Account/v1/User/dffc7f9a-baa3-4598-80a6-29d823a331e9 [200 OK, 324B, 202ms]
+  ✓  Status code is 200
+  ✓  User has no books
+
+→ Delete user
+  DELETE https://demoqa.com/Account/v1/User/dffc7f9a-baa3-4598-80a6-29d823a331e9 [204 No Content, 185B, 356ms]
+  ✓  Status code is 204
+
+→ Get user after Delete
+  GET https://demoqa.com/Account/v1/User/dffc7f9a-baa3-4598-80a6-29d823a331e9 [401 Unauthorized, 297B, 310ms]
+  ✓  Status code is 401
+
+┌─────────────────────────┬─────────────────────┬────────────────────┐
+│                         │            executed │             failed │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│              iterations │                   1 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│                requests │                  19 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│            test-scripts │                  38 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│      prerequest-scripts │                  34 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│              assertions │                  27 │                  0 │
+├─────────────────────────┴─────────────────────┴────────────────────┤
+│ total run duration: 6.2s                                           │
+├────────────────────────────────────────────────────────────────────┤
+│ total data received: 10.34kB (approx)                              │
+├────────────────────────────────────────────────────────────────────┤
+│ average response time: 299ms [min: 176ms, max: 755ms, s.d.: 142ms] │
+└────────────────────────────────────────────────────────────────────┘
+19:41:02 kate ~/Рабочий стол/ТЕСТИРОВАНИЕ/Projects/Postman_Project (main) $ 

@@ -1,0 +1,121 @@
+18:45:16 kate ~/Рабочий стол $ cd ТЕСТИРОВАНИЕ/Projects/Postman_Project/For_newman/
+19:00:00 kate ~/Рабочий стол/ТЕСТИРОВАНИЕ/Projects/Postman_Project/For_newman (main) $ newman run 'Postman_Project_Book_Store_v1_run_collection.postman_collection.json' -e 'Environment for BookStore.postman_environment.json' 
+newman
+
+Postman_Project_Book_Store_v1_run_collection
+
+→ Create new user
+  POST https://demoqa.com/Account/v1/User [201 Created, 328B, 649ms]
+  ✓  Body have a username
+  ✓  Status code is 201
+
+→ GenerateToken (when try login)
+  POST https://demoqa.com/Account/v1/GenerateToken [200 OK, 532B, 337ms]
+  ✓  Status code is 200
+  ✓  Body have a token
+
+→ Auth
+  POST https://demoqa.com/Account/v1/Authorized [200 OK, 246B, 177ms]
+  ✓  Authorization completed
+  ✓  Status code is 200
+
+→ Login
+  POST https://demoqa.com/Account/v1/Login [200 OK, 633B, 268ms]
+  ✓  Body have a token
+  ✓  Status code is 200
+
+→ Get user
+  ┌
+  │ 'Does userId exist? true'
+  │ 'Does token exist? true'
+  └
+  GET https://demoqa.com/Account/v1/User/30f81dc8-42d7-45c5-8f80-bf1b17b3f656 [200 OK, 323B, 272ms]
+  ✓  Status code is 200
+  ✓  User has no books
+
+→ Get books
+  GET https://demoqa.com/BookStore/v1/Books [200 OK, 4.76kB, 181ms]
+  ┌
+  │ 'Array length: 8'
+  └
+  ✓  number of books
+  ✓  Status code is 200
+  ┌
+  │ 'Array ISBN: 9781449325862,9781449331818,9781449337711,9781449365035,9781491904244,9781491950296,9781593275846,9781593277574'
+  └
+
+→ Add all books to the user (loop)
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 181ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 358ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 291ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 268ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 381ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 291ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 260ms]
+  ✓  Status code is 201
+
+→ Add all books to the user (loop)
+  POST https://demoqa.com/BookStore/v1/Books [201 Created, 285B, 275ms]
+  ✓  Status code is 201
+
+→ Get user after Add books
+  GET https://demoqa.com/Account/v1/User/30f81dc8-42d7-45c5-8f80-bf1b17b3f656 [200 OK, 4.83kB, 195ms]
+  ✓  Status code is 200
+  ✓  User has all books
+
+→ Delete all books
+  DELETE https://demoqa.com/BookStore/v1/Books?UserId=30f81dc8-42d7-45c5-8f80-bf1b17b3f656 [204 No Content, 185B, 208ms]
+  ✓  Status code is 204
+
+→ Get user after Delete books
+  GET https://demoqa.com/Account/v1/User/30f81dc8-42d7-45c5-8f80-bf1b17b3f656 [200 OK, 323B, 235ms]
+  ✓  Status code is 200
+  ✓  User has no books
+
+→ Delete user
+  DELETE https://demoqa.com/Account/v1/User/30f81dc8-42d7-45c5-8f80-bf1b17b3f656 [204 No Content, 185B, 381ms]
+  ✓  Status code is 204
+
+→ Get user after Delete
+  GET https://demoqa.com/Account/v1/User/30f81dc8-42d7-45c5-8f80-bf1b17b3f656 [401 Unauthorized, 297B, 187ms]
+  ✓  Status code is 401
+
+┌─────────────────────────┬─────────────────────┬────────────────────┐
+│                         │            executed │             failed │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│              iterations │                   1 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│                requests │                  19 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│            test-scripts │                  38 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│      prerequest-scripts │                  34 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│              assertions │                  27 │                  0 │
+├─────────────────────────┴─────────────────────┴────────────────────┤
+│ total run duration: 5.9s                                           │
+├────────────────────────────────────────────────────────────────────┤
+│ total data received: 10.34kB (approx)                              │
+├────────────────────────────────────────────────────────────────────┤
+│ average response time: 283ms [min: 177ms, max: 649ms, s.d.: 107ms] │
+└────────────────────────────────────────────────────────────────────┘
+19:00:28 kate ~/Рабочий стол/ТЕСТИРОВАНИЕ/Projects/Postman_Project/For_newman (main) $ 
+
