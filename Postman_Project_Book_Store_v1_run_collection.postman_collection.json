@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "42bf9c36-24f3-40a2-ab67-67144413c3ef",
-		"name": "Postman Project (Book Store) v1 (run collection)",
+		"name": "Postman_Project_Book_Store_v1_run_collection",
 		"description": "Коллекция собрана на основе Postman Interceptor. Удалены дополнительные и дублирующие запросы, добавлены тесты и переменные. Добавлен запрос на подтверждение авторизации Auth. Коллекция подготовлена для запуска через run collection.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "23398719"
@@ -26,7 +26,6 @@
 							"pm.test(\"Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
 							"});",
-							"",
 							""
 						],
 						"type": "text/javascript"
@@ -268,8 +267,6 @@
 							"pm.environment.set(\"userId\", jsonData.userId);",
 							"pm.environment.set(\"token\", jsonData.token);",
 							"",
-							"console.log(\"Token value = \" + jsonData.token);",
-							"console.log(\"UserId value = \" + jsonData.userId);",
 							"",
 							"// check that we have a status 200 in the response",
 							"pm.test(\"Status code is 200\", function () {",
@@ -355,9 +352,7 @@
 					"script": {
 						"exec": [
 							"console.log(\"Does userId exist? \" + pm.environment.has(\"userId\"));",
-							"console.log(\"userId value = \" + pm.environment.get(\"userId\"));",
 							"console.log(\"Does token exist? \" + pm.environment.has(\"token\"));",
-							"console.log(\"token value = \" + pm.environment.get(\"token\"));",
 							"",
 							""
 						],
@@ -434,15 +429,12 @@
 						"exec": [
 							"// check how many books we have",
 							"let jsonData = pm.response.json();",
-							"let arrayLength = jsonData.books.length;",
 							"",
-							"console.log(\"Array length: \" + arrayLength);",
+							"console.log(\"Array length: \" + jsonData.books.length);",
 							"",
 							"pm.collectionVariables.set(\"number_of_books\", jsonData.books.length);",
 							"",
-							"",
 							"pm.test(\"number of books\", function(){",
-							"    let jsonData = pm.response.json();",
 							"    pm.expect(jsonData.books.length).to.gt(0);",
 							"});",
 							"",
@@ -451,12 +443,11 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"// set a book's isbn to the array and to the local variables",
+							"// set a book's isbn to the array and to the variable",
 							"const response = pm.response.json();",
 							"const bookIsbns = response.books.map(books => books.isbn);",
 							"console.log(\"Array ISBN: \" + bookIsbns);",
 							"pm.variables.set(\"bookIsbns\", bookIsbns);",
-							"",
 							""
 						],
 						"type": "text/javascript"
@@ -615,8 +606,7 @@
 							"// check that user has all books",
 							"pm.test(\"User has all books\", function() {",
 							"    var jsonData = pm.response.json();",
-							"    var expectedNumberOfBooks = pm.collectionVariables.get(\"number_of_books\");",
-							"    pm.expect(jsonData.books.length).to.equal(expectedNumberOfBooks);",
+							"    pm.expect(jsonData.books.length).to.equal(pm.collectionVariables.get(\"number_of_books\"));",
 							"});",
 							""
 						],
