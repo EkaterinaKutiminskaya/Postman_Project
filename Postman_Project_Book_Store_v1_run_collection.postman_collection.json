@@ -447,7 +447,7 @@
 							"",
 							"// set a book's isbn to the array and to the variable",
 							"const response = pm.response.json();",
-							"const bookIsbns = response.books.map(books => books.isbn);",
+							"let bookIsbns = response.books.map(books => books.isbn);",
 							"console.log(\"Array ISBN: \" + bookIsbns);",
 							"pm.variables.set(\"bookIsbns\", bookIsbns);",
 							""
@@ -955,6 +955,10 @@
 							"    pm.response.to.have.status(401);",
 							"});",
 							"",
+							"pm.environment.unset(\"userName\");",
+							"pm.environment.unset(\"password\");",
+							"pm.environment.unset(\"userId\");",
+							"pm.environment.unset(\"token\");",
 							""
 						],
 						"type": "text/javascript"
