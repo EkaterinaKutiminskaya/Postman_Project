@@ -17,7 +17,7 @@
 							"",
 							"// check that we have a username in the response",
 							"pm.test(\"Body have a username\", function () {",
-							"    var jsonData = pm.response.json();",
+							"    let jsonData = pm.response.json();",
 							"    pm.expect(jsonData.username).to.be.a('string');",
 							"});",
 							"",
@@ -26,7 +26,15 @@
 							"pm.test(\"Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
 							"});",
-							""
+							"",
+							"",
+							"let jsonRequest = pm.request.body;",
+							"",
+							"let body = JSON.parse(jsonRequest);",
+							"pm.environment.set(\"userName\", body.userName);",
+							"pm.environment.set(\"password\", body.password);",
+							"let pass = body.password",
+							"let userName = body.userName;"
 						],
 						"type": "text/javascript"
 					}
@@ -35,13 +43,7 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"let number = _.random (10, 100);",
-							"",
-							"let userName = \"Kat\" + number;",
-							"pm.environment.set(\"userName\", userName);",
-							"",
-							"",
-							"console.log(userName);"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -77,7 +79,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"userName\": \"{{userName}}\",\n    \"password\": \"{{password}}\"\n}"
+					"raw": "{\n    \"userName\": \"{{randomName}}\",\n    \"password\": \"{{randomPass}}\"\n}"
 				},
 				"url": {
 					"raw": "https://demoqa.com/Account/v1/User",
@@ -109,7 +111,7 @@
 							"",
 							"// check that we have a token in the response",
 							"pm.test(\"Body have a token\", function () {",
-							"    var jsonData = pm.response.json();",
+							"    let jsonData = pm.response.json();",
 							"    pm.expect(jsonData.token).to.be.a('string');",
 							"});"
 						],
@@ -175,7 +177,7 @@
 							"",
 							"// check that user is authorized",
 							"pm.test(\"Authorization completed\", function () {",
-							"    var jsonData = pm.response.json();",
+							"    let jsonData = pm.response.json();",
 							"    pm.expect(jsonData).to.be.eq(true);",
 							"});",
 							"",
@@ -340,7 +342,7 @@
 							"});",
 							"",
 							"pm.test(\"User has no books\", function() {",
-							"    var jsonData = pm.response.json();",
+							"    let jsonData = pm.response.json();",
 							"    pm.expect(jsonData.books.length).to.equal(0);",
 							"});"
 						],
@@ -605,7 +607,7 @@
 							"",
 							"// check that user has all books",
 							"pm.test(\"User has all books\", function() {",
-							"    var jsonData = pm.response.json();",
+							"    let jsonData = pm.response.json();",
 							"    pm.expect(jsonData.books.length).to.equal(pm.collectionVariables.get(\"number_of_books\"));",
 							"});",
 							""
@@ -777,7 +779,7 @@
 							"});",
 							"",
 							"pm.test(\"User has no books\", function() {",
-							"    var jsonData = pm.response.json();",
+							"    let jsonData = pm.response.json();",
 							"    pm.expect(jsonData.books.length).to.equal(0);",
 							"});"
 						],
