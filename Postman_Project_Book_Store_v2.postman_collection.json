@@ -531,12 +531,12 @@
 					"script": {
 						"exec": [
 							"// check that we have a status 201 in the response",
-							"if(pm.collectionVariables.get(\"bookIsbns\").length > 0) {",
-							"    pm.test(\"Status code is 201\", function () {",
+							"if(!pm.collectionVariables.get(\"currentBookIsbn\")) {",
+							"    pm.test.skip(\"Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
 							"    });",
 							"} else {",
-							"    pm.test.skip(\"Status code is 201\", function () {",
+							"    pm.test(\"Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
 							"    });",
 							"};",
