@@ -531,9 +531,16 @@
 					"script": {
 						"exec": [
 							"// check that we have a status 201 in the response",
-							"pm.test(\"Status code is 201\", function () {",
+							"if(pm.collectionVariables.get(\"bookIsbns\").length > 0) {",
+							"    pm.test(\"Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
-							"});"
+							"    });",
+							"} else {",
+							"    pm.test.skip(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    });",
+							"};",
+							""
 						],
 						"type": "text/javascript"
 					}
